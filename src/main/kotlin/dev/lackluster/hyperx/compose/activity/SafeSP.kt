@@ -35,6 +35,14 @@ object SafeSP {
         }
     }
 
+    fun putStringSet(key: String, set: Set<String>) {
+        if (mSP == null) return
+        mSP!!.edit().apply {
+            putStringSet(key, set)
+            apply()
+        }
+    }
+
     fun getBoolean(key: String): Boolean {
         return getBoolean(key, false)
     }
@@ -80,6 +88,14 @@ object SafeSP {
             defValue
         } else {
             mSP!!.getString(key, defValue) ?: defValue
+        }
+    }
+
+    fun getStringSet(key: String, defValue: MutableSet<String>): MutableSet<String> {
+        return if (mSP == null) {
+            defValue
+        } else {
+            mSP!!.getStringSet(key, defValue) ?: defValue
         }
     }
 }

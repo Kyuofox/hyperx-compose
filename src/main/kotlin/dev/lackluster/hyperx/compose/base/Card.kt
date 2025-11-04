@@ -3,6 +3,7 @@ package dev.lackluster.hyperx.compose.base
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
@@ -123,19 +124,30 @@ object CardDefaults {
      * Creates a [CardColors] that represents the default container and content colors used in a
      * [Card].
      */
-    @Composable fun cardColors() =
-        defaultCardColorsCached
-            ?: CardColors(
-                containerColor = MiuixTheme.colorScheme.surface,
-                contentColor = contentColorFor(MiuixTheme.colorScheme.surface),
-                disabledContainerColor = MiuixTheme.colorScheme.surface
-                        .copy(alpha = DisabledAlpha)
-                        .compositeOver(MiuixTheme.colorScheme.surface),
-                disabledContentColor =
-                    contentColorFor(MiuixTheme.colorScheme.surface)
-                        .copy(DisabledAlpha),
-            )
-                .also { defaultCardColorsCached = it }
+    @Composable fun cardColors(): CardColors {
+        val isDark = isSystemInDarkTheme()
+        return if (isDark) {
+            defaultCardColorsDarkCached
+        } else {
+            defaultCardColorsLightCached
+        } ?: CardColors(
+            containerColor = MiuixTheme.colorScheme.surface,
+            contentColor = contentColorFor(MiuixTheme.colorScheme.surface),
+            disabledContainerColor = MiuixTheme.colorScheme.surface
+                .copy(alpha = DisabledAlpha)
+                .compositeOver(MiuixTheme.colorScheme.surface),
+            disabledContentColor =
+                contentColorFor(MiuixTheme.colorScheme.surface)
+                    .copy(DisabledAlpha),
+        ).also {
+            if (isDark) {
+                defaultCardColorsDarkCached = it
+            } else {
+                defaultCardColorsLightCached = it
+            }
+        }
+    }
+
 
     /**
      * Creates a [CardColors] that represents the default container and content colors used in a
@@ -160,7 +172,8 @@ object CardDefaults {
             disabledContentColor = disabledContentColor,
         )
 
-    internal var defaultCardColorsCached: CardColors? = null
+    internal var defaultCardColorsLightCached: CardColors? = null
+    internal var defaultCardColorsDarkCached: CardColors? = null
 }
 
 /**
