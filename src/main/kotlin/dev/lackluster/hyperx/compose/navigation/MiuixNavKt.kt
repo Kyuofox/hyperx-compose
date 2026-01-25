@@ -24,7 +24,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.get
 import dev.lackluster.hyperx.compose.navigation.MiuixNavHostDefaults.NavAnimationEasing
 import dev.lackluster.hyperx.compose.navigation.MiuixNavHostDefaults.TRANSITION_DURATION
-import kotlin.collections.forEach
 
 
 @Composable

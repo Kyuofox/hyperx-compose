@@ -41,7 +41,7 @@ import top.yukonga.miuix.kmp.basic.TopAppBar
 import top.yukonga.miuix.kmp.basic.rememberTopAppBarState
 import top.yukonga.miuix.kmp.icon.MiuixIcons
 import top.yukonga.miuix.kmp.icon.icons.useful.Back
-import top.yukonga.miuix.kmp.theme.MiuixTheme
+import top.yukonga.miuix.kmp.theme.MiuixTheme.colorScheme
 import top.yukonga.miuix.kmp.utils.getWindowSize
 import top.yukonga.miuix.kmp.utils.overScrollVertical
 import top.yukonga.miuix.kmp.utils.scrollEndHaptic
@@ -69,14 +69,14 @@ fun BasePage(
                 modifier = Modifier.size(26.dp),
                 imageVector = MiuixIcons.Useful.Back,
                 contentDescription = "Back",
-                tint = MiuixTheme.colorScheme.onSurfaceSecondary
+                tint = colorScheme.onSurfaceSecondary
             )
         }
     },
     actions: @Composable RowScope.(padding: PaddingValues) -> Unit = {},
     content: LazyListScope.() -> Unit
 ) {
-    val topAppBarBackground = MiuixTheme.colorScheme.background
+    val topAppBarBackground = colorScheme.surface
     val scrollBehavior = MiuixScrollBehavior(rememberTopAppBarState())
     val listState = rememberLazyListState()
     val topBarBlurState by remember {
@@ -131,7 +131,7 @@ fun BasePage(
                 .nestedScroll(scrollBehavior.nestedScrollConnection)
                 .scrollEndHaptic()
                 .height(getWindowSize().height.dp)
-                .background(MiuixTheme.colorScheme.background),
+                .background(colorScheme.surface),
             state = listState,
             contentPadding = paddingValues,
             content = content

@@ -20,8 +20,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.lackluster.hyperx.compose.R
 import dev.lackluster.hyperx.compose.activity.SafeSP
-import dev.lackluster.hyperx.compose.base.ImageIcon
 import dev.lackluster.hyperx.compose.base.DrawableResIcon
+import dev.lackluster.hyperx.compose.base.ImageIcon
 import top.yukonga.miuix.kmp.basic.BasicComponent
 import top.yukonga.miuix.kmp.basic.BasicComponentColors
 import top.yukonga.miuix.kmp.basic.BasicComponentDefaults
@@ -92,12 +92,11 @@ fun SeekBarPreference(
         )
         Slider(
             modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 16.dp),
-            progress = spValue.toFloat(),
-            minValue = min.toFloat(),
-            maxValue = max.toFloat(),
+            value = spValue.toFloat(),
+            valueRange = min.toFloat()..max.toFloat(),
             height = 28.dp,
             enabled = enabled,
-            onProgressChange = { newValue ->
+            onValueChange = { newValue ->
                 val newInt = newValue.toInt()
                 spValue = newInt
                 key?.let { SafeSP.putAny(it, newInt) }
@@ -180,12 +179,11 @@ fun SeekBarPreference(
         )
         Slider(
             modifier = Modifier.padding(16.dp, 0.dp, 16.dp, 16.dp),
-            progress = spValue,
-            minValue = min,
-            maxValue = max,
+            value = spValue,
+            valueRange = min..max,
             height = 28.dp,
             enabled = enabled,
-            onProgressChange = { newValue ->
+            onValueChange = { newValue ->
                 spValue = newValue
                 key?.let { SafeSP.putAny(it, newValue) }
                 updatedOnValueChange?.let { it1 -> it1(newValue) }

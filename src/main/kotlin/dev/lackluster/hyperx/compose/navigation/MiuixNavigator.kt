@@ -12,7 +12,6 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 import androidx.navigation.compose.composable
-import kotlin.jvm.JvmSuppressWildcards
 import kotlinx.coroutines.flow.StateFlow
 
 /**

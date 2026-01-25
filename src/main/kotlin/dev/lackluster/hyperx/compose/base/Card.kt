@@ -18,11 +18,11 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.unit.dp
+import com.mocharealm.gaze.capsule.ContinuousRoundedRectangle
 import dev.lackluster.hyperx.compose.theme.DisabledAlpha
 import dev.lackluster.hyperx.compose.theme.contentColorFor
 import top.yukonga.miuix.kmp.basic.Surface
-import top.yukonga.miuix.kmp.theme.MiuixTheme
-import top.yukonga.miuix.kmp.utils.G2RoundedCornerShape
+import top.yukonga.miuix.kmp.theme.MiuixTheme.colorScheme
 
 /**
  * Cards contain contain content and actions that relate information about a subject. Filled cards
@@ -114,7 +114,7 @@ object CardDefaults {
     // shape Defaults
     /** Default shape for a card. */
     val shape: Shape
-        @Composable get() = G2RoundedCornerShape(16.dp)
+        @Composable get() = ContinuousRoundedRectangle(16.dp)
 
     val contentPaddingZero: PaddingValues = PaddingValues.Zero
 
@@ -131,13 +131,13 @@ object CardDefaults {
         } else {
             defaultCardColorsLightCached
         } ?: CardColors(
-            containerColor = MiuixTheme.colorScheme.surface,
-            contentColor = contentColorFor(MiuixTheme.colorScheme.surface),
-            disabledContainerColor = MiuixTheme.colorScheme.surface
+            containerColor = colorScheme.background,
+            contentColor = contentColorFor(colorScheme.background),
+            disabledContainerColor = colorScheme.background
                 .copy(alpha = DisabledAlpha)
-                .compositeOver(MiuixTheme.colorScheme.surface),
+                .compositeOver(colorScheme.background),
             disabledContentColor =
-                contentColorFor(MiuixTheme.colorScheme.surface)
+                contentColorFor(colorScheme.background)
                     .copy(DisabledAlpha),
         ).also {
             if (isDark) {
