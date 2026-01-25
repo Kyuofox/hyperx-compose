@@ -16,8 +16,8 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import dev.lackluster.hyperx.compose.base.ImageIcon
 import dev.lackluster.hyperx.compose.base.DrawableResIcon
+import dev.lackluster.hyperx.compose.base.ImageIcon
 import top.yukonga.miuix.kmp.basic.BasicComponent
 import top.yukonga.miuix.kmp.basic.BasicComponentColors
 import top.yukonga.miuix.kmp.basic.BasicComponentDefaults
@@ -25,6 +25,7 @@ import top.yukonga.miuix.kmp.basic.Text
 import top.yukonga.miuix.kmp.icon.MiuixIcons
 import top.yukonga.miuix.kmp.icon.icons.basic.ArrowRight
 import top.yukonga.miuix.kmp.theme.MiuixTheme
+import top.yukonga.miuix.kmp.theme.MiuixTheme.colorScheme
 
 @Composable
 fun TextPreference(
@@ -84,8 +85,8 @@ fun TextPreference(
 object RightActionDefaults {
     @Composable
     fun rightActionColors() = RightActionColor(
-        color = MiuixTheme.colorScheme.onSurfaceVariantActions,
-        disabledColor = MiuixTheme.colorScheme.disabledOnSecondaryVariant
+        color = colorScheme.onSurfaceVariantActions,
+        disabledColor = colorScheme.disabledOnSecondaryVariant
     )
 }
 

@@ -46,7 +46,7 @@ import dev.lackluster.hyperx.compose.navigation.MiuixNavHostDefaults
 import dev.lackluster.hyperx.compose.navigation.miuixComposable
 import dev.lackluster.hyperx.compose.navigation.rememberMiuixNavController
 import dev.lackluster.hyperx.compose.theme.AppTheme
-import top.yukonga.miuix.kmp.theme.MiuixTheme
+import top.yukonga.miuix.kmp.theme.MiuixTheme.colorScheme
 import top.yukonga.miuix.kmp.utils.MiuixPopupUtils
 import top.yukonga.miuix.kmp.utils.getWindowSize
 
@@ -154,14 +154,14 @@ fun SplitLayout(
     Row(
         modifier = Modifier
             .fillMaxSize()
-            .background(MiuixTheme.colorScheme.background)
+            .background(colorScheme.surface)
     ) {
         Box(
             modifier = Modifier.weight(leftWeight)
         ) {
             mainPageContent(navController, contentPaddingLeft, BasePageDefaults.Mode.SPLIT_LEFT)
         }
-        VerticalDivider(thickness = 0.75.dp, color = MiuixTheme.colorScheme.dividerLine)
+        VerticalDivider(thickness = 0.75.dp, color = colorScheme.dividerLine)
         MiuixNavHost(
             navController = navController,
             startDestination = HyperXAppDefaults.PAGE_EMPTY,

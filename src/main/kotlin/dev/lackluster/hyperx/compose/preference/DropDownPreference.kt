@@ -37,8 +37,8 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import dev.lackluster.hyperx.compose.R
 import dev.lackluster.hyperx.compose.activity.SafeSP
-import dev.lackluster.hyperx.compose.base.ImageIcon
 import dev.lackluster.hyperx.compose.base.DrawableResIcon
+import dev.lackluster.hyperx.compose.base.ImageIcon
 import kotlinx.coroutines.launch
 import top.yukonga.miuix.kmp.basic.BasicComponent
 import top.yukonga.miuix.kmp.basic.BasicComponentColors
@@ -48,6 +48,8 @@ import top.yukonga.miuix.kmp.basic.ListPopupColumn
 import top.yukonga.miuix.kmp.basic.PopupPositionProvider
 import top.yukonga.miuix.kmp.basic.Text
 import top.yukonga.miuix.kmp.basic.TextButton
+import top.yukonga.miuix.kmp.extra.SpinnerColors
+import top.yukonga.miuix.kmp.extra.SpinnerDefaults
 import top.yukonga.miuix.kmp.extra.SpinnerEntry
 import top.yukonga.miuix.kmp.extra.SpinnerItemImpl
 import top.yukonga.miuix.kmp.extra.SuperDialog
@@ -69,6 +71,7 @@ fun DropDownPreference(
     enabled: Boolean = true,
     titleColor: BasicComponentColors = BasicComponentDefaults.titleColor(),
     summaryColor: BasicComponentColors = BasicComponentDefaults.summaryColor(),
+    spinnerColors: SpinnerColors = SpinnerDefaults.dialogSpinnerColors(),
     rightActionColor: RightActionColor = RightActionDefaults.rightActionColors(),
     onSelectedIndexChange: ((Int) -> Unit)? = null,
 ) {
@@ -174,7 +177,8 @@ fun DropDownPreference(
                                     entryCount = wrappedEntries.size,
                                     isSelected = spValue == index,
                                     index = index,
-                                    dialogMode = false
+                                    dialogMode = false,
+                                    spinnerColors = spinnerColors
                                 ) { newValue ->
                                     spValue = newValue
                                     hapticFeedback.performHapticFeedback(HapticFeedbackType.Confirm)
@@ -246,7 +250,8 @@ fun DropDownPreference(
                                 entryCount = wrappedEntries.size,
                                 isSelected = spValue == index,
                                 index = index,
-                                dialogMode = true
+                                dialogMode = true,
+                                spinnerColors = spinnerColors
                             ) { newValue ->
                                 spValue = newValue
                                 hapticFeedback.performHapticFeedback(HapticFeedbackType.Confirm)

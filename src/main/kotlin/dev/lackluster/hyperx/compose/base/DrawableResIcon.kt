@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import top.yukonga.miuix.kmp.utils.G2RoundedCornerShape
+import com.mocharealm.gaze.capsule.ContinuousRoundedRectangle
 
 data class ImageIcon(
     val iconVector: ImageVector? = null,
@@ -84,7 +84,7 @@ fun DrawableResIcon(
             if (iconCornerRadius != Dp.Unspecified)
                 Modifier.clip(
                     if (iconCornerRadius >= iconSizeDp / 2) CircleShape
-                    else G2RoundedCornerShape(iconCornerRadius)
+                    else ContinuousRoundedRectangle(iconCornerRadius)
                 )
             else
                 Modifier

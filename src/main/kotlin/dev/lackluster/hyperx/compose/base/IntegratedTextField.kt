@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import dev.lackluster.hyperx.compose.preference.RightActionDefaults
 import top.yukonga.miuix.kmp.basic.Text
 import top.yukonga.miuix.kmp.theme.MiuixTheme
+import top.yukonga.miuix.kmp.theme.MiuixTheme.colorScheme
 
 @Composable
 fun IntegratedTextField(
@@ -54,7 +55,7 @@ fun IntegratedTextField(
         textStyle = MiuixTheme.textStyles.main.copy(
             textAlign = TextAlign.End
         ),
-        cursorBrush = SolidColor(MiuixTheme.colorScheme.primary),
+        cursorBrush = SolidColor(colorScheme.primary),
         interactionSource = interaction,
         decorationBox =
         @Composable { innerTextField ->

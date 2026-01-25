@@ -44,13 +44,12 @@ import androidx.navigation.Navigator
 import androidx.navigation.compose.LocalOwnersProvider
 import androidx.navigation.createGraph
 import androidx.navigation.get
+import com.mocharealm.gaze.capsule.ContinuousRoundedRectangle
 import dev.lackluster.hyperx.compose.animation.NavTransitionEasing
+import kotlinx.coroutines.launch
 import kotlin.coroutines.cancellation.CancellationException
-import kotlin.jvm.JvmSuppressWildcards
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
-import kotlinx.coroutines.launch
-import top.yukonga.miuix.kmp.utils.G2RoundedCornerShape
 
 /**
  * Provides a place in the Compose hierarchy for self contained navigation to occur.
@@ -499,7 +498,7 @@ fun MiuixNavHost(
         }
 
         val clipShape = remember(cornerRadius) {
-            G2RoundedCornerShape(
+            ContinuousRoundedRectangle(
                 topStart = cornerRadius,
                 topEnd = cornerRadius,
                 bottomEnd = cornerRadius,

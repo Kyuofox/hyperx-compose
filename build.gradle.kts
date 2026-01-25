@@ -32,12 +32,13 @@ android {
 
 @Suppress("UseTomlInstead")
 dependencies {
-    api("top.yukonga.miuix.kmp:miuix:0.5.2")
+    api("top.yukonga.miuix.kmp:miuix:0.7.2")
     api("dev.chrisbanes.haze:haze:1.6.10")
     api("androidx.compose.foundation:foundation:1.9.3")
     api("androidx.activity:activity-compose:1.11.0")
     api("androidx.navigation:navigation-compose:2.9.5")
     api("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")
+    implementation("com.mocharealm.gaze:capsule:2.1.1-patch2")
     implementation("io.github.biezhi:TinyPinyin:2.0.3.RELEASE")
     implementation("io.coil-kt.coil3:coil-compose:3.3.0")
 }
