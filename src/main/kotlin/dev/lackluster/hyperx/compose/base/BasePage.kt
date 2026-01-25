@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.displayCutout
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
@@ -40,9 +41,8 @@ import top.yukonga.miuix.kmp.basic.MiuixScrollBehavior
 import top.yukonga.miuix.kmp.basic.TopAppBar
 import top.yukonga.miuix.kmp.basic.rememberTopAppBarState
 import top.yukonga.miuix.kmp.icon.MiuixIcons
-import top.yukonga.miuix.kmp.icon.icons.useful.Back
+import top.yukonga.miuix.kmp.icon.extended.Back
 import top.yukonga.miuix.kmp.theme.MiuixTheme.colorScheme
-import top.yukonga.miuix.kmp.utils.getWindowSize
 import top.yukonga.miuix.kmp.utils.overScrollVertical
 import top.yukonga.miuix.kmp.utils.scrollEndHaptic
 
@@ -67,7 +67,7 @@ fun BasePage(
         ) {
             Icon(
                 modifier = Modifier.size(26.dp),
-                imageVector = MiuixIcons.Useful.Back,
+                imageVector = MiuixIcons.Back,
                 contentDescription = "Back",
                 tint = colorScheme.onSurfaceSecondary
             )
@@ -102,8 +102,6 @@ fun BasePage(
         modifier = Modifier.fillMaxSize(),
         topBar = { contentPadding ->
             TopAppBar(
-                modifier = Modifier
-                    .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Top)),
                 color = topAppBarBackground.copy(
                     if (topBarBlurState) 0f else 1f
                 ),
@@ -111,7 +109,6 @@ fun BasePage(
                 scrollBehavior = scrollBehavior,
                 navigationIcon = { navigationIcon.invoke(navigationIconPadding) },
                 actions = { actions(this, actionsPadding) },
-                defaultWindowInsetsPadding = false,
                 horizontalPadding = 28.dp + contentPadding.calculateLeftPadding(LocalLayoutDirection.current)
             )
         },
@@ -130,7 +127,7 @@ fun BasePage(
                 .overScrollVertical()
                 .nestedScroll(scrollBehavior.nestedScrollConnection)
                 .scrollEndHaptic()
-                .height(getWindowSize().height.dp)
+                .fillMaxHeight()
                 .background(colorScheme.surface),
             state = listState,
             contentPadding = paddingValues,

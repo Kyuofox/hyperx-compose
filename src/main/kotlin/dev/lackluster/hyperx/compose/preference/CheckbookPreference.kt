@@ -43,12 +43,12 @@ fun CheckboxPreference(
         titleColor = titleColor,
         summary = summary,
         summaryColor = summaryColor,
-        leftAction = {
+        startAction = {
             icon?.let {
                 DrawableResIcon(it)
             }
         },
-        rightActions = {
+        endActions = {
             Checkbox(
                 modifier = Modifier,
                 checked = spValue,

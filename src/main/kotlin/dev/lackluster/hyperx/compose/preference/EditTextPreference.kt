@@ -43,7 +43,7 @@ import top.yukonga.miuix.kmp.basic.TextButton
 import top.yukonga.miuix.kmp.basic.TextField
 import top.yukonga.miuix.kmp.extra.SuperDialog
 import top.yukonga.miuix.kmp.icon.MiuixIcons
-import top.yukonga.miuix.kmp.icon.icons.basic.ArrowRight
+import top.yukonga.miuix.kmp.icon.basic.ArrowRight
 import top.yukonga.miuix.kmp.theme.MiuixTheme
 
 @Composable
@@ -100,12 +100,12 @@ fun EditTextPreference(
         titleColor = titleColor,
         summary = spValue.toString().takeIf { valuePosition == ValuePosition.SUMMARY_VIEW && it.isNotBlank() } ?: summary,
         summaryColor = summaryColor,
-        leftAction = {
+        startAction = {
             icon?.let {
                 DrawableResIcon(it)
             }
         },
-        rightActions = {
+        endActions = {
             if (valuePosition == ValuePosition.VALUE_VIEW) {
                 Text(
                     modifier = Modifier.widthIn(max = 130.dp),

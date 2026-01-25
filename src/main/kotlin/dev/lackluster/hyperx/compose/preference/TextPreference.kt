@@ -23,7 +23,7 @@ import top.yukonga.miuix.kmp.basic.BasicComponentColors
 import top.yukonga.miuix.kmp.basic.BasicComponentDefaults
 import top.yukonga.miuix.kmp.basic.Text
 import top.yukonga.miuix.kmp.icon.MiuixIcons
-import top.yukonga.miuix.kmp.icon.icons.basic.ArrowRight
+import top.yukonga.miuix.kmp.icon.basic.ArrowRight
 import top.yukonga.miuix.kmp.theme.MiuixTheme
 import top.yukonga.miuix.kmp.theme.MiuixTheme.colorScheme
 
@@ -47,12 +47,12 @@ fun TextPreference(
         titleColor = titleColor,
         summary = summary,
         summaryColor = summaryColor,
-        leftAction = {
+        startAction = {
             icon?.let {
                 DrawableResIcon(it)
             }
         },
-        rightActions = {
+        endActions = {
             value?.let {
                 Text(
                     modifier = Modifier.widthIn(max = 130.dp),
