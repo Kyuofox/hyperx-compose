@@ -73,12 +73,12 @@ fun SeekBarPreference(
             insideMargin = PaddingValues(16.dp, 16.dp, 16.dp, 12.dp),
             title = title,
             titleColor = titleColor,
-            leftAction = {
+            startAction = {
                 icon?.let {
                     DrawableResIcon(it)
                 }
             },
-            rightActions = {
+            endActions = {
                 if (showValue) {
                     Text(
                         text = String.format(Locale.current.platformLocale, format, spValue),
@@ -160,12 +160,12 @@ fun SeekBarPreference(
             insideMargin = PaddingValues(16.dp, 16.dp, 16.dp, 12.dp),
             title = title,
             titleColor = titleColor,
-            leftAction = {
+            startAction = {
                 icon?.let {
                     DrawableResIcon(it)
                 }
             },
-            rightActions = {
+            endActions = {
                 if (showValue) {
                     Text(
                         text = String.format(Locale.current.platformLocale, format, spValue),

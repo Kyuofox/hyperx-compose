@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraphBuilder
@@ -48,7 +49,6 @@ import dev.lackluster.hyperx.compose.navigation.rememberMiuixNavController
 import dev.lackluster.hyperx.compose.theme.AppTheme
 import top.yukonga.miuix.kmp.theme.MiuixTheme.colorScheme
 import top.yukonga.miuix.kmp.utils.MiuixPopupUtils
-import top.yukonga.miuix.kmp.utils.getWindowSize
 
 @Composable
 fun HyperXApp(
@@ -61,9 +61,9 @@ fun HyperXApp(
         val configuration = LocalConfiguration.current
         val isLandscape by rememberUpdatedState(configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
         val density = LocalDensity.current
-        val getWindowSize by rememberUpdatedState(getWindowSize())
-        val windowWidth by rememberUpdatedState(getWindowSize.width.dp / density.density)
-        val windowHeight by rememberUpdatedState(getWindowSize.height.dp / density.density)
+        val windowInfo by rememberUpdatedState(LocalWindowInfo.current)
+        val windowWidth by rememberUpdatedState(windowInfo.containerDpSize.width / density.density)
+        val windowHeight by rememberUpdatedState(windowInfo.containerDpSize.height / density.density)
         val largeScreen by remember { derivedStateOf { (windowHeight >= 480.dp && windowWidth >= 840.dp) } }
         val appRootLayout: AppRootLayout
         val normalLayoutPadding: PaddingValues

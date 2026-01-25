@@ -43,7 +43,6 @@ import kotlinx.coroutines.launch
 import top.yukonga.miuix.kmp.basic.BasicComponent
 import top.yukonga.miuix.kmp.basic.BasicComponentColors
 import top.yukonga.miuix.kmp.basic.BasicComponentDefaults
-import top.yukonga.miuix.kmp.basic.ListPopup
 import top.yukonga.miuix.kmp.basic.ListPopupColumn
 import top.yukonga.miuix.kmp.basic.PopupPositionProvider
 import top.yukonga.miuix.kmp.basic.Text
@@ -53,8 +52,9 @@ import top.yukonga.miuix.kmp.extra.SpinnerDefaults
 import top.yukonga.miuix.kmp.extra.SpinnerEntry
 import top.yukonga.miuix.kmp.extra.SpinnerItemImpl
 import top.yukonga.miuix.kmp.extra.SuperDialog
+import top.yukonga.miuix.kmp.extra.SuperListPopup
 import top.yukonga.miuix.kmp.icon.MiuixIcons
-import top.yukonga.miuix.kmp.icon.icons.basic.ArrowUpDownIntegrated
+import top.yukonga.miuix.kmp.icon.basic.ArrowUpDown
 import top.yukonga.miuix.kmp.interfaces.HoldDownInteraction
 import top.yukonga.miuix.kmp.theme.MiuixTheme
 
@@ -156,15 +156,15 @@ fun DropDownPreference(
         titleColor = titleColor,
         summary = summary,
         summaryColor = summaryColor,
-        leftAction = {
+        startAction = {
             if (mode != DropDownMode.Dialog) {
                 if (isDropdownExpanded.value) {
-                    ListPopup(
+                    SuperListPopup(
                         show = showPopup,
                         alignment = if ((mode == DropDownMode.AlwaysOnRight || !alignLeft))
-                            PopupPositionProvider.Align.Right
+                            PopupPositionProvider.Align.End
                         else
-                            PopupPositionProvider.Align.Left,
+                            PopupPositionProvider.Align.Start,
                         onDismissRequest = {
                             showPopup.value = false
                             isDropdownExpanded.value = false
@@ -197,7 +197,7 @@ fun DropDownPreference(
                 DrawableResIcon(it)
             }
         },
-        rightActions = {
+        endActions = {
             if (showValue) {
                 Text(
                     modifier = Modifier.widthIn(max = 130.dp),
@@ -214,7 +214,7 @@ fun DropDownPreference(
                     .padding(start = 8.dp)
                     .size(10.dp, 16.dp)
                     .align(Alignment.CenterVertically),
-                imageVector = MiuixIcons.Basic.ArrowUpDownIntegrated,
+                imageVector = MiuixIcons.Basic.ArrowUpDown,
                 colorFilter = ColorFilter.tint(rightActionColor.color(enabled)),
                 contentDescription = null
             )

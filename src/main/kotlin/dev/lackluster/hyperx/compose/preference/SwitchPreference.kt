@@ -43,12 +43,12 @@ fun SwitchPreference(
         titleColor = titleColor,
         summary = summary,
         summaryColor = summaryColor,
-        leftAction = {
+        startAction = {
             icon?.let {
                 DrawableResIcon(it)
             }
         },
-        rightActions = {
+        endActions = {
             Switch(
                 checked = spValue,
                 onCheckedChange = { newValue ->
@@ -96,12 +96,12 @@ fun SwitchPreference(
         titleColor = titleColor,
         summary = summary,
         summaryColor = summaryColor,
-        leftAction = {
+        startAction = {
             icon?.let {
                 DrawableResIcon(it)
             }
         },
-        rightActions = {
+        endActions = {
             Switch(
                 checked = checked.value,
                 onCheckedChange = { newValue ->
