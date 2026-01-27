@@ -32,9 +32,9 @@ import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import dev.chrisbanes.haze.HazeStyle
 import dev.chrisbanes.haze.HazeTint
+import dev.lackluster.hyperx.compose.navigation3.Navigator
 import top.yukonga.miuix.kmp.basic.Icon
 import top.yukonga.miuix.kmp.basic.IconButton
 import top.yukonga.miuix.kmp.basic.MiuixScrollBehavior
@@ -48,7 +48,7 @@ import top.yukonga.miuix.kmp.utils.scrollEndHaptic
 
 @Composable
 fun BasePage(
-    navController: NavController,
+    navigator: Navigator,
     adjustPadding: PaddingValues,
     title: String,
     blurEnabled: MutableState<Boolean> = mutableStateOf(true),
@@ -62,7 +62,7 @@ fun BasePage(
                 .padding(start = 21.dp)
                 .size(40.dp),
             onClick = {
-                navController.popBackStack()
+                navigator.pop()
             }
         ) {
             Icon(
