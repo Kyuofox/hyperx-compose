@@ -138,36 +138,33 @@ fun DropDownPreference(
     }
 
     val dropDownContent = @Composable { alignment: PopupPositionProvider.Align ->
-        if (isDropdownExpanded.value) {
-            SuperListPopup(
-                show = showPopup,
-                alignment = alignment,
-                onDismissRequest = {
-                    showPopup.value = false
-                    isDropdownExpanded.value = false
-                }
-            ) {
-                ListPopupColumn {
-                    wrappedEntries.forEachIndexed { index, spinnerEntry ->
-                        SpinnerItemImpl(
-                            entry = spinnerEntry,
-                            entryCount = wrappedEntries.size,
-                            isSelected = spValue == index,
-                            index = index,
-                            dialogMode = false,
-                            spinnerColors = spinnerColors
-                        ) { newValue ->
-                            spValue = newValue
-                            hapticFeedback.performHapticFeedback(HapticFeedbackType.Confirm)
-                            key?.let { SafeSP.putAny(it, newValue) }
-                            updatedOnSelectedIndexChange?.let { it1 -> it1(newValue) }
-                            showPopup.value = false
-                            isDropdownExpanded.value = false
-                        }
+        SuperListPopup(
+            show = showPopup,
+            alignment = alignment,
+            onDismissRequest = {
+                showPopup.value = false
+                isDropdownExpanded.value = false
+            }
+        ) {
+            ListPopupColumn {
+                wrappedEntries.forEachIndexed { index, spinnerEntry ->
+                    SpinnerItemImpl(
+                        entry = spinnerEntry,
+                        entryCount = wrappedEntries.size,
+                        isSelected = spValue == index,
+                        index = index,
+                        dialogMode = false,
+                        spinnerColors = spinnerColors
+                    ) { newValue ->
+                        spValue = newValue
+                        hapticFeedback.performHapticFeedback(HapticFeedbackType.Confirm)
+                        key?.let { SafeSP.putAny(it, newValue) }
+                        updatedOnSelectedIndexChange?.let { it1 -> it1(newValue) }
+                        showPopup.value = false
+                        isDropdownExpanded.value = false
                     }
                 }
             }
-            showPopup.value = true
         }
     }
 
@@ -225,6 +222,7 @@ fun DropDownPreference(
         },
         onClick = {
             if (enabled) {
+                showPopup.value = true
                 isDropdownExpanded.value = true
                 hapticFeedback.performHapticFeedback(HapticFeedbackType.ContextClick)
                 coroutineScope.launch {
