@@ -137,6 +137,40 @@ fun DropDownPreference(
         }
     }
 
+    val dropDownContent = @Composable { alignment: PopupPositionProvider.Align ->
+        if (isDropdownExpanded.value) {
+            SuperListPopup(
+                show = showPopup,
+                alignment = alignment,
+                onDismissRequest = {
+                    showPopup.value = false
+                    isDropdownExpanded.value = false
+                }
+            ) {
+                ListPopupColumn {
+                    wrappedEntries.forEachIndexed { index, spinnerEntry ->
+                        SpinnerItemImpl(
+                            entry = spinnerEntry,
+                            entryCount = wrappedEntries.size,
+                            isSelected = spValue == index,
+                            index = index,
+                            dialogMode = false,
+                            spinnerColors = spinnerColors
+                        ) { newValue ->
+                            spValue = newValue
+                            hapticFeedback.performHapticFeedback(HapticFeedbackType.Confirm)
+                            key?.let { SafeSP.putAny(it, newValue) }
+                            updatedOnSelectedIndexChange?.let { it1 -> it1(newValue) }
+                            showPopup.value = false
+                            isDropdownExpanded.value = false
+                        }
+                    }
+                }
+            }
+            showPopup.value = true
+        }
+    }
+
     BasicComponent(
         modifier = Modifier
             .pointerInput(Unit) {
@@ -157,41 +191,8 @@ fun DropDownPreference(
         summary = summary,
         summaryColor = summaryColor,
         startAction = {
-            if (mode != DropDownMode.Dialog) {
-                if (isDropdownExpanded.value) {
-                    SuperListPopup(
-                        show = showPopup,
-                        alignment = if ((mode == DropDownMode.AlwaysOnRight || !alignLeft))
-                            PopupPositionProvider.Align.End
-                        else
-                            PopupPositionProvider.Align.Start,
-                        onDismissRequest = {
-                            showPopup.value = false
-                            isDropdownExpanded.value = false
-                        }
-                    ) {
-                        ListPopupColumn {
-                            wrappedEntries.forEachIndexed { index, spinnerEntry ->
-                                SpinnerItemImpl(
-                                    entry = spinnerEntry,
-                                    entryCount = wrappedEntries.size,
-                                    isSelected = spValue == index,
-                                    index = index,
-                                    dialogMode = false,
-                                    spinnerColors = spinnerColors
-                                ) { newValue ->
-                                    spValue = newValue
-                                    hapticFeedback.performHapticFeedback(HapticFeedbackType.Confirm)
-                                    key?.let { SafeSP.putAny(it, newValue) }
-                                    updatedOnSelectedIndexChange?.let { it1 -> it1(newValue) }
-                                    showPopup.value = false
-                                    isDropdownExpanded.value = false
-                                }
-                            }
-                        }
-                    }
-                    showPopup.value = true
-                }
+            if (mode != DropDownMode.AlwaysOnRight && alignLeft && mode != DropDownMode.Dialog) {
+                dropDownContent(PopupPositionProvider.Align.Start)
             }
             icon?.let {
                 DrawableResIcon(it)
@@ -218,6 +219,9 @@ fun DropDownPreference(
                 colorFilter = ColorFilter.tint(rightActionColor.color(enabled)),
                 contentDescription = null
             )
+            if ((mode == DropDownMode.AlwaysOnRight || !alignLeft) && mode != DropDownMode.Dialog) {
+                dropDownContent(PopupPositionProvider.Align.End)
+            }
         },
         onClick = {
             if (enabled) {
