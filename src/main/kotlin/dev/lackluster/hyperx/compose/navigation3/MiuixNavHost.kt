@@ -3,13 +3,14 @@ package dev.lackluster.hyperx.compose.navigation3
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -59,41 +60,43 @@ fun MiuixNavHost(
         contentAlignment = contentAlignment,
         label = "MiuixNavHost"
     ) { key ->
-        Box(modifier = Modifier) {
+        Box(modifier = Modifier.fillMaxSize()) {
             content(key)
         }
     }
 }
 
-private val NavAnimationEasing = MiuixNavHostDefaults.NavAnimationEasing
-private const val TRANSITION_DURATION = MiuixNavHostDefaults.TRANSITION_DURATION
+private fun <T> miuixSpringSpec() = spring<T>(
+    dampingRatio = 0.85f,
+    stiffness = 440f
+)
 
 private fun miuixEnterTransition(): EnterTransition =
     slideInHorizontally(
         initialOffsetX = { it },
-        animationSpec = tween(TRANSITION_DURATION, 0, NavAnimationEasing)
+        animationSpec = miuixSpringSpec()
     )
 
 private fun miuixExitTransition(): ExitTransition =
     slideOutHorizontally(
         targetOffsetX = { -it / 4 },
-        animationSpec = tween(TRANSITION_DURATION, 0, NavAnimationEasing)
+        animationSpec = miuixSpringSpec()
     ) + fadeOut(
         targetAlpha = 0.5f,
-        animationSpec = tween(TRANSITION_DURATION, 0, NavAnimationEasing)
+        animationSpec = miuixSpringSpec()
     )
 
 private fun miuixPopEnterTransition(): EnterTransition =
     slideInHorizontally(
         initialOffsetX = { -it / 4 },
-        animationSpec = tween(TRANSITION_DURATION, 0, NavAnimationEasing)
+        animationSpec = miuixSpringSpec()
     ) + fadeIn(
         initialAlpha = 0.5f,
-        animationSpec = tween(TRANSITION_DURATION, 0, NavAnimationEasing)
+        animationSpec = miuixSpringSpec()
     )
 
 private fun miuixPopExitTransition(): ExitTransition =
     slideOutHorizontally(
         targetOffsetX = { it },
-        animationSpec = tween(TRANSITION_DURATION, 0, NavAnimationEasing)
+        animationSpec = miuixSpringSpec()
     )
