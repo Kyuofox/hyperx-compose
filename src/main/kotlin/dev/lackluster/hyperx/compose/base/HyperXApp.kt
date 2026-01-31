@@ -1,14 +1,9 @@
 package dev.lackluster.hyperx.compose.base
 
 import android.content.res.Configuration
-import androidx.activity.compose.BackHandler
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
@@ -16,9 +11,11 @@ import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.displayCutout
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
@@ -34,15 +31,15 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalWindowInfo
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.Dp
-import dev.lackluster.hyperx.compose.navigation3.rememberNavigator
+import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import dev.lackluster.hyperx.compose.R
 import dev.lackluster.hyperx.compose.activity.HyperXActivity
 import dev.lackluster.hyperx.compose.navigation3.MiuixNavHost
 import dev.lackluster.hyperx.compose.navigation3.Navigator
 import dev.lackluster.hyperx.compose.navigation3.Route
+import dev.lackluster.hyperx.compose.navigation3.rememberNavigator
 import dev.lackluster.hyperx.compose.theme.AppTheme
 import top.yukonga.miuix.kmp.theme.MiuixTheme.colorScheme
 import top.yukonga.miuix.kmp.utils.MiuixPopupUtils
@@ -98,9 +95,6 @@ fun NormalLayout(
     extraPadding: PaddingValues = PaddingValues(0.dp)
 ) {
     val navigator = rememberNavigator(Route.Main)
-    BackHandler(enabled = navigator.canPop) {
-        navigator.pop()
-    }
     val layoutDirection = LocalLayoutDirection.current
     val systemBarInsets = WindowInsets.systemBars.add(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal).asPaddingValues()
     val contentPadding = systemBarInsets.let {
@@ -132,9 +126,6 @@ fun SplitLayout(
     rightWeight: Float = 1.0f
 ) {
     val navigator = rememberNavigator(Route.Empty)
-    BackHandler(enabled = navigator.canPop) {
-        navigator.pop()
-    }
     val layoutDirection = LocalLayoutDirection.current
     val systemBarInsets = WindowInsets.systemBars.add(WindowInsets.displayCutout).only(WindowInsetsSides.Horizontal).asPaddingValues()
     val contentPaddingLeft = systemBarInsets.let {

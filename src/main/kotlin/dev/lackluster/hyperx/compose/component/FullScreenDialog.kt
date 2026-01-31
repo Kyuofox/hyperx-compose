@@ -15,11 +15,11 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import dev.lackluster.hyperx.compose.navigation3.Navigator
 import dev.lackluster.hyperx.compose.base.BasePage
 import dev.lackluster.hyperx.compose.base.BasePageDefaults
 import dev.lackluster.hyperx.compose.icon.ImmersionClose
 import dev.lackluster.hyperx.compose.icon.ImmersionConfirm
+import dev.lackluster.hyperx.compose.navigation3.Navigator
 import top.yukonga.miuix.kmp.basic.Icon
 import top.yukonga.miuix.kmp.basic.IconButton
 import top.yukonga.miuix.kmp.icon.MiuixIcons

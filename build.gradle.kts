@@ -39,6 +39,7 @@ dependencies {
     api("androidx.compose.foundation:foundation:1.10.1")
     api("androidx.activity:activity-compose:1.12.2")
     api("androidx.navigation3:navigation3-runtime:1.1.0-alpha02")
+    api("androidx.navigationevent:navigationevent-compose:1.0.1")
     api("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
     api("androidx.lifecycle:lifecycle-viewmodel-navigation3:2.10.0")
     implementation("com.mocharealm.gaze:capsule:2.1.1-patch2")

@@ -18,6 +18,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
+import androidx.navigationevent.NavigationEventInfo
+import androidx.navigationevent.compose.NavigationBackHandler
+import androidx.navigationevent.compose.rememberNavigationEventState
 
 @Composable
 fun MiuixNavHost(
@@ -28,6 +31,15 @@ fun MiuixNavHost(
     content: @Composable (NavKey) -> Unit
 ) {
     val currentKey = navigator.current() ?: return
+
+    if (navigator.canPop) {
+        val info = NavigationEventInfo.None
+        val state = rememberNavigationEventState(info)
+        NavigationBackHandler(
+            state = state,
+            onBackCompleted = { navigator.pop() }
+        )
+    }
 
     AnimatedContent(
         targetState = currentKey,
