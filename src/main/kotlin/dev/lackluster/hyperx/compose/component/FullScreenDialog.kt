@@ -15,11 +15,11 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import dev.lackluster.hyperx.compose.base.BasePage
 import dev.lackluster.hyperx.compose.base.BasePageDefaults
 import dev.lackluster.hyperx.compose.icon.ImmersionClose
 import dev.lackluster.hyperx.compose.icon.ImmersionConfirm
+import dev.lackluster.hyperx.compose.navigation3.Navigator
 import top.yukonga.miuix.kmp.basic.Icon
 import top.yukonga.miuix.kmp.basic.IconButton
 import top.yukonga.miuix.kmp.icon.MiuixIcons
@@ -28,7 +28,7 @@ import top.yukonga.miuix.kmp.theme.MiuixTheme
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun FullScreenDialog(
-    navController: NavController,
+    navigator: Navigator,
     adjustPadding: PaddingValues,
     title: String,
     blurEnabled: MutableState<Boolean> = mutableStateOf(true),
@@ -36,10 +36,10 @@ fun FullScreenDialog(
     blurTintAlphaDark: MutableFloatState = mutableFloatStateOf(0.5f),
     mode: BasePageDefaults.Mode = BasePageDefaults.Mode.FULL,
     onNegativeButton: (() -> Unit)? = {
-        navController.popBackStack()
+        navigator.goBack()
     },
     onPositiveButton: (() -> Unit)? = {
-        navController.popBackStack()
+        navigator.goBack()
     },
     content: LazyListScope.() -> Unit
 ) {
@@ -51,7 +51,7 @@ fun FullScreenDialog(
     }
 
     BasePage(
-        navController,
+        navigator,
         adjustPadding,
         title,
         blurEnabled,

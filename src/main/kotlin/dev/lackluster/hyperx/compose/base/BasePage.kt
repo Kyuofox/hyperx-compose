@@ -10,12 +10,10 @@ import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -32,9 +30,9 @@ import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import dev.chrisbanes.haze.HazeStyle
 import dev.chrisbanes.haze.HazeTint
+import dev.lackluster.hyperx.compose.navigation3.Navigator
 import top.yukonga.miuix.kmp.basic.Icon
 import top.yukonga.miuix.kmp.basic.IconButton
 import top.yukonga.miuix.kmp.basic.MiuixScrollBehavior
@@ -48,7 +46,7 @@ import top.yukonga.miuix.kmp.utils.scrollEndHaptic
 
 @Composable
 fun BasePage(
-    navController: NavController,
+    navigator: Navigator,
     adjustPadding: PaddingValues,
     title: String,
     blurEnabled: MutableState<Boolean> = mutableStateOf(true),
@@ -62,7 +60,7 @@ fun BasePage(
                 .padding(start = 21.dp)
                 .size(40.dp),
             onClick = {
-                navController.popBackStack()
+                navigator.goBack()
             }
         ) {
             Icon(
