@@ -1,6 +1,5 @@
 package dev.lackluster.hyperx.compose.component
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -15,6 +14,9 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigationevent.NavigationEventInfo
+import androidx.navigationevent.compose.NavigationBackHandler
+import androidx.navigationevent.compose.rememberNavigationEventState
 import dev.lackluster.hyperx.compose.base.BasePage
 import dev.lackluster.hyperx.compose.base.BasePageDefaults
 import dev.lackluster.hyperx.compose.icon.ImmersionClose
@@ -45,10 +47,13 @@ fun FullScreenDialog(
 ) {
     val currentOnNegativeButton by rememberUpdatedState(onNegativeButton)
     val currentOnPositiveButton by rememberUpdatedState(onPositiveButton)
+    val navigationEventState = rememberNavigationEventState(NavigationEventInfo.None)
 
-    BackHandler(enabled = true) {
-        currentOnNegativeButton?.invoke()
-    }
+    NavigationBackHandler(
+        state = navigationEventState,
+        isBackEnabled = true,
+        onBackCompleted = { currentOnNegativeButton?.invoke() }
+    )
 
     BasePage(
         navigator,

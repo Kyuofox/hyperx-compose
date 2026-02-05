@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -19,7 +20,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
-import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
@@ -40,6 +40,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
+import androidx.navigationevent.NavigationEventInfo
+import androidx.navigationevent.compose.NavigationBackHandler
+import androidx.navigationevent.compose.rememberNavigationEventState
 import dev.lackluster.hyperx.compose.R
 import dev.lackluster.hyperx.compose.navigation3.MiuixNavHostDefaults
 import dev.lackluster.hyperx.compose.navigation3.NavigationState
@@ -66,6 +69,14 @@ fun HyperXApp(
             topLevelRoutes = topLevelRoutes
         )
         val navigator = remember { Navigator(navigationState) }
+        val canGoBack by remember { derivedStateOf { navigator.canGoBack } }
+        val navigationEventState = rememberNavigationEventState(NavigationEventInfo.None)
+
+        NavigationBackHandler(
+            state = navigationEventState,
+            isBackEnabled = canGoBack,
+            onBackCompleted = { navigator.goBack() }
+        )
 
         val configuration = LocalConfiguration.current
         val isLandscape by rememberUpdatedState(configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)

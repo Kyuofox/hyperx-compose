@@ -15,6 +15,18 @@ class Navigator(val state: NavigationState) {
         }
     }
 
+    val canGoBack: Boolean
+        get() {
+            val currentStack = state.backStacks[state.topLevelRoute] ?: return false
+            if (currentStack.isEmpty()) return false
+            val currentRoute = currentStack.last()
+            return if (currentRoute == state.topLevelRoute) {
+                state.topLevelRoute != state.startRoute
+            } else {
+                true
+            }
+        }
+
     fun goBack() {
         val currentStack = state.backStacks[state.topLevelRoute] ?:
         error("Stack for ${state.topLevelRoute} not found")
